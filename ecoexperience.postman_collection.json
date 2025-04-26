@@ -1,0 +1,52 @@
+{
+	"info": {
+		"_postman_id": "152fe3bf-7731-4059-b501-bbc6e5e6b568",
+		"name": "ecoexperience",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20211420"
+	},
+	"item": [
+		{
+			"name": "userscrud",
+			"item": [
+				{
+					"name": "createUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"nombre\":\"Gema\",\r\n    \"apellidos\": \"Rubio s0anchez\",\r\n    \"tlfno\": \"697411247\",\r\n    \"correo\": \"grubio@gmail.com\",\r\n    \"dni\": \"2A\",\r\n    \"pais\": \"España\",\r\n    \"pass\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUser",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
