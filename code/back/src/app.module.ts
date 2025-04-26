@@ -8,7 +8,19 @@ import { RolesModule } from './roles/roles.module';
 
 @Module({
   imports: [ ConfigModule.forRoot(),
-    TypeOrmModule.forRoot(AppDataSource.options),
+    //Descomentar para hacer migraciones
+    //TypeOrmModule.forRoot(AppDataSource.options),
+    //Comentar para ejecutar
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: process.env.DB_HOST,
+      port: 3306,
+      username: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      database: process.env.DB_DATABASE,
+      autoLoadEntities: true,
+      synchronize: false,
+    }),
     UsersModule,
     RolesModule
   ],
