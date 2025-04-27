@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryColumn, BeforeInsert, BeforeUpdate, BeforeRemove, PrimaryGeneratedColumn, DeleteDateColumn } from "typeorm";
+import { Role } from "src/roles/entities/role.entity";
+import { Entity, Column, PrimaryColumn, BeforeInsert, BeforeUpdate, BeforeRemove, PrimaryGeneratedColumn, DeleteDateColumn, OneToMany, ManyToMany } from "typeorm";
 
 @Entity('users')
 
@@ -29,4 +30,7 @@ export class User {
     
     @DeleteDateColumn({ type: 'timestamp', name: 'deleted_at', nullable: true }) 
     deletedAt?: Date;
+
+    @ManyToMany(() => Role, (rol) => rol.rolesAsignados)
+    roles: Role[];
 }
