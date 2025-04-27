@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \r\n    \"nombre\":\"Gema\",\r\n    \"apellidos\": \"Rubio s0anchez\",\r\n    \"tlfno\": \"697411247\",\r\n    \"correo\": \"grubio@gmail.com\",\r\n    \"dni\": \"2A\",\r\n    \"pais\": \"España\",\r\n    \"pass\": \"1234\"\r\n}",
+							"raw": "{\r\n    \r\n    \"nombre\":\"Gema2\",\r\n    \"apellidos\": \"Rubio s0anchez\",\r\n    \"tlfno\": \"697411247\",\r\n    \"correo\": \"grubio@nest.com\",\r\n    \"dni\": \"2B\",\r\n    \"pais\": \"España\",\r\n    \"pass\": \"1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -42,7 +42,40 @@
 					"name": "getUser",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/users/admin@nest.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"admin@nest.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
 					},
 					"response": []
 				}
