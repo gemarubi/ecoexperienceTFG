@@ -26,7 +26,7 @@ export class User {
     pais: string;
 
     @Column({ type: 'varchar', nullable:true })
-    pass: string;
+    pass?: string;
     
     @DeleteDateColumn({ type: 'timestamp', name: 'deleted_at', nullable: true }) 
     deletedAt?: Date;

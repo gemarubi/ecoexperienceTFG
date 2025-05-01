@@ -1,4 +1,4 @@
-import { IsInt, IsNotEmpty, IsString, Length } from "class-validator";
+import { IsArray, IsInt, IsNotEmpty, IsString, Length } from "class-validator";
 export class CreateUserDto {
 
 
@@ -23,6 +23,7 @@ export class CreateUserDto {
     
     @IsString()
     pass: string;
-        
+    @IsArray()
+    roles: number[];
     
 }

@@ -12,9 +12,9 @@ export class RolesController {
     return this.rolesService.create(createRoleDto);
   }
 
-  @Get()
-  findAll() {
-    return this.rolesService.findAll();
+  @Get(':id')
+  findAllOfUser(@Param('id') id: number) {
+    return this.rolesService.findOne(id);
   }
 
   @Get(':id')
