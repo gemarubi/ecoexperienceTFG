@@ -21,7 +21,7 @@ export class AuthService {
         console.log('Input password:', pass);
     
         if (pass === user.pass) {
-            const { pass, ...result } = user; //Excluimos la contraseña antes de devolver el usuario
+            const { pass, ...result } = user;
             console.log(result);
             return result;
         }
@@ -34,9 +34,9 @@ export class AuthService {
         return roles
     }
     async login(user: User,roles:Role[]) {
-        const payload = { email: user.correo, sub: user.id, role: roles };
+        const payload = { email: user, sub: user.id, role: roles };
         return {
-          access_token: this.jwtService.sign(payload),
+          token: this.jwtService.sign(payload),
         };
       }
     

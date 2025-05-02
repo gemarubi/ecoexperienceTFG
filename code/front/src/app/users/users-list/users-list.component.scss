@@ -1,0 +1,27 @@
+.bg-admin{
+  background: linear-gradient(to bottom, #004a1e,#006428);
+}
+
+.tittle-color{
+  color:#004a1e;
+  font-family: 'Montserrat', Helvetica, Arial, Lucida, sans-serif;
+}
+
+.bg-header-table{
+  background-color: #004a1e !important;
+  color: #97BF1E;
+}
+.bg-add-button{
+  background-color: #e9f8bd !important;
+  color:#004a1e !important;
+
+  font-size: large;
+}
+.user-header {
+  background: linear-gradient(to bottom, #daeeb7, #e8f5e9); // blanco a verde muy claro
+  border-left: 5px solid #388e3c; // verde intenso para acento
+  border-right: 5px solid #388e3c;;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}

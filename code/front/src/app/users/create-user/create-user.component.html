@@ -1,0 +1,74 @@
+<div class="dialog-container ">
+  <div class="d-flex justify-content-center p-4 bg-create-user">
+    <span class="h3 mt-4 ">Registro de usuario</span>
+  </div>
+
+  <div class="row g-3 px-3" mat-dialog-content>
+    <div class="container-fluid">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Nombre</mat-label>
+        <input matInput [(ngModel)]="user.nombre" name="nombre" required />
+      </mat-form-field>
+    </div>
+
+    <div class="container-fluid">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Apellidos</mat-label>
+        <input matInput [(ngModel)]="user.apellidos" name="apellidos" required />
+      </mat-form-field>
+    </div>
+
+    <div class="container-fluid">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Teléfono</mat-label>
+        <input matInput [(ngModel)]="user.tlfno" name="tlfno" required />
+      </mat-form-field>
+    </div>
+
+    <div class="container-fluid">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>DNI</mat-label>
+        <input matInput [(ngModel)]="user.dni" name="dni" required />
+      </mat-form-field>
+    </div>
+
+    <div class="container-fluid">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>País</mat-label>
+        <input matInput [(ngModel)]="user.pais" name="pais" required />
+      </mat-form-field>
+    </div>
+
+    <div class="container-fluid">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="user.correo" name="correo" type="email" required />
+      </mat-form-field>
+    </div>
+
+    <div class="container-fluid">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Contraseña</mat-label>
+        <input matInput [(ngModel)]="user.pass" name="pass" type="password" required />
+      </mat-form-field>
+    </div>
+
+    <div class="container-fluid">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Roles</mat-label>
+        <mat-select [(ngModel)]="user.roles" name="roles" multiple required>
+          <mat-option *ngFor="let rol of roles" [value]="rol.id">{{ rol.descripcion }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <mat-dialog-actions class="button-group d-flex justify-content-center mt-4">
+    <button mat-raised-button (click)="close()" color="warn" class=" action-button">
+      Cancelar
+    </button>
+    <button mat-raised-button (click)="save()" color="primary" class="action-button">
+      Guardar
+    </button>
+  </mat-dialog-actions>
+</div>

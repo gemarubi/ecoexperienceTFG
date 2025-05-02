@@ -1,0 +1,29 @@
+<div class="container-fluid bg-login min-vh-100">
+
+  <div class="d-flex justify-content-center align-items-center min-vh-100">
+
+
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class=" bg-white rounded-4 shadow login-form" >
+      <div class="contanier pb-4">
+        <h1 class="text-center tittle-color">Inicio Sesión</h1>
+      </div>
+
+    <mat-form-field appearance="outline" class="w-100 mb-3">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" name="email" [(ngModel)]="correo" required />
+      <mat-error *ngIf="loginForm.submitted && !correo">El email es obligatorio</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-100 mb-3 ">
+      <mat-label>Contraseña</mat-label>
+      <input matInput type="password" name="password" [(ngModel)]="pass" required />
+      <mat-error *ngIf="loginForm.submitted && !pass">La contraseña es obligatoria</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button type="submit" class="d-block mx-auto w-50 bg-button text-white">
+      Iniciar sesión
+    </button>
+  </form>
+  </div>
+</div>
+

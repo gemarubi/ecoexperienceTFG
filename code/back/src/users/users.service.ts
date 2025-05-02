@@ -41,7 +41,9 @@ export class UsersService {
 
   async findAll(): Promise<User[]> {
     try {
-      return await this.usersRepository.find();
+      return await this.usersRepository.find({
+        relations: ['roles'],
+      });
     } catch (error) {
       this.logger.error(error);
       throw new InternalServerErrorException('Error al obtener las personas');
