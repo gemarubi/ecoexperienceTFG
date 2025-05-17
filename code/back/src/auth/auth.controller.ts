@@ -8,7 +8,7 @@ export class AuthController {
     constructor(private authService: AuthService) {}
     @Post('login')
     async login(@Body() body) {
-      const user = await this.authService.validateUser(body.email, body.pass);
+      const user = await this.authService.validateUser(body.correo, body.pass);
       const roles = await this.authService.getRoles(user.id)
       return this.authService.login(user,roles);
     }

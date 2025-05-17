@@ -98,15 +98,20 @@ export class UsersService {
     try {
       const user = await this.usersRepository.findOne({
         where: {
-          id: 1
-        }
+          id: id
+        },
+        relations: ['roles'] 
       } );
   
       if (!user) {
         throw new NotFoundException(`No se encontró ningun usuario con id  ${id}`);
       }
-  
-      Object.assign(user, updateUserDto); // Mezcla los datos nuevos
+      const { roles, ...rest } = updateUserDto;
+      Object.assign(user, rest);
+      const rolesEntities = await this.rolesRepository.findBy({ id: In(updateUserDto.roles!) });
+      user.roles = rolesEntities;
+      console.log(user)
+      
       return await this.usersRepository.save(user);
     } catch (error) {
       this.logger.error(`Error al actualizar usuario con id ${id}:`, error);

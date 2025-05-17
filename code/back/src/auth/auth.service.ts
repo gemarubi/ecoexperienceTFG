@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 import { User } from 'src/users/entities/user.entity';
 import { Role } from 'src/roles/entities/role.entity';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -11,7 +12,7 @@ export class AuthService {
 
     async validateUser(correo: string, pass: string) {
         const user = await this.usersService.findEmail(correo);
-    
+        
         if (!user || ! user.pass ){
             throw new UnauthorizedException('Invalid credentials');
         }
@@ -20,13 +21,14 @@ export class AuthService {
         console.log('User password:', user.pass);
         console.log('Input password:', pass);
     
-        if (pass === user.pass) {
-            const { pass, ...result } = user;
-            console.log(result);
-            return result;
+        const isPasswordValid = await bcrypt.compare(pass, user.pass);
+
+        if (isPasswordValid) {
+          const { pass, ...result } = user;
+          return result;
         }
     
-        throw new UnauthorizedException('Invalid credentials');
+        throw new UnauthorizedException('no validas');
     }
 
     async getRoles (id_user:number){
@@ -34,7 +36,9 @@ export class AuthService {
         return roles
     }
     async login(user: User,roles:Role[]) {
-        const payload = { email: user, sub: user.id, role: roles };
+        //
+        // console.log(user)
+        const payload = { user: user, role: roles };
         return {
           token: this.jwtService.sign(payload),
         };

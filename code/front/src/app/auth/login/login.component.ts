@@ -21,7 +21,7 @@ errorMessage: string = ''
     .subscribe({
       next: (response) => {
         if (response.token) {
-          localStorage.setItem('token', response.token);
+            sessionStorage.setItem('token', response.token);
           this.router.navigate(['/users/users-list']);
         }
       },

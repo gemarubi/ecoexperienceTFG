@@ -23,15 +23,51 @@
 
     </div>
     <div class="col-3 col-md-2 d-flex justify-content-center">
-      
+
       <button
-        class="bg-primary-eco text-white rounded-5 text-nowrap  px-4 py-2 w-100 border-0 d-flex justify-content-between align-items-center"
-        style="display: flex !important;"
-        routerLink="/auth/login"
-      >
-        <span class="ps-4 fs-5 fw-semibold title-header verde-secondary-footer">Iniciar Sesión</span>
-        <mat-icon class="verde-secondary-text">login</mat-icon>
-      </button>
+      *ngIf="!isLoggedIn(); else userMenu"
+      class="bg-primary-eco text-white rounded-5 text-nowrap px-4 py-2 w-100 border-0 d-flex justify-content-between align-items-center"
+      routerLink="/auth/login"
+    >
+      <span class="ps-4 fs-5 fw-semibold title-header verde-secondary-footer">Iniciar Sesión</span>
+      <mat-icon class="verde-secondary-text">login</mat-icon>
+    </button>
+
+
+    <ng-template #userMenu>
+
+      <ng-container *ngIf="isAdmin(); else simpleLogout">
+        <button
+          mat-button
+          [matMenuTriggerFor]="adminMenu"
+          class="bg-primary-eco text-white rounded-5 px-4 py-2 d-flex justify-content-between w-100"
+        >
+        <span class="fw-semibold">{{ getUserFullName() }}</span>
+          <mat-icon class="ms-2">expand_more</mat-icon>
+        </button>
+
+        <mat-menu #adminMenu="matMenu">
+          <button mat-menu-item routerLink="/users/users-list">
+            <mat-icon>dashboard</mat-icon>
+            Administración
+          </button>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            Cerrar sesión
+          </button>
+        </mat-menu>
+      </ng-container>
+
+      <ng-template #simpleLogout>
+        <button
+          (click)="logout()"
+          class="bg-primary-eco text-white rounded-5 px-4 py-2 w-100 border-0 d-flex justify-content-between align-items-center"
+        >
+          <span class="fs-5 fw-semibold">Cerrar Sesión</span>
+          <mat-icon>logout</mat-icon>
+        </button>
+      </ng-template>
+    </ng-template>
     </div>
 
   </div>

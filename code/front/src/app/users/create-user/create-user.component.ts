@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Role, User } from '../interfaces/user';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UserService } from '../user.service';
@@ -9,8 +9,8 @@ import { UserService } from '../user.service';
   templateUrl: './create-user.component.html',
   styleUrl: './create-user.component.scss'
 })
-export class CreateUserComponent {
-  user:User = {
+export class CreateUserComponent implements OnInit {
+  user: User = {
     nombre: '',
     apellidos: '',
     tlfno: '',
@@ -22,14 +22,29 @@ export class CreateUserComponent {
   };
 
   roles: Role[] = [
-    { id: 1, descripcion: 'Admin' },
-    { id: 2, descripcion: 'Cliente' }
+    { id: 1, descripcion: 'Administrador' },
+    { id: 2, descripcion: 'Cliente' },
+    { id: 3, descripcion: 'Guía' }
   ];
+
+  isEditMode = false;
 
   constructor(
     private dialogRef: MatDialogRef<CreateUserComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private userService: UserService
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private userService: UserService
   ) {}
+
+  ngOnInit(): void {
+    if (this.data?.user) {
+      this.isEditMode = true;
+
+      this.user = {
+        ...this.data.user,
+        roles: this.data.user.roles.map((r: Role) => r.id)
+      };
+    }
+  }
 
   close(): void {
     this.dialogRef.close();
@@ -37,10 +52,17 @@ export class CreateUserComponent {
 
   save(): void {
     if (this.validateUser()) {
-      this.userService.createUser(this.user).subscribe({
-        next: (res) => this.dialogRef.close(res),
-        error: (err) => console.error('Error al crear usuario', err)
-      });
+      if (this.isEditMode) {
+        this.userService.updateUser(this.user.id!, this.user).subscribe({
+          next: (res) => this.dialogRef.close({ user: res, message:"Usuario actualizado correctamente" }),
+          error: (err) => console.error('Error al actualizar usuario', err)
+        });
+      } else {
+        this.userService.createUser(this.user).subscribe({
+          next: (res) => this.dialogRef.close({ user: res, message:"Usuario creado correctamente" }),
+          error: (err) => console.error('Error al crear usuario', err)
+        });
+      }
     }
   }
 

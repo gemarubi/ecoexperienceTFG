@@ -1,3 +1,4 @@
+import { Reserva } from "src/reservas/entities/reserva.entity";
 import { Role } from "src/roles/entities/role.entity";
 import { Entity, Column, PrimaryColumn, BeforeInsert, BeforeUpdate, BeforeRemove, PrimaryGeneratedColumn, DeleteDateColumn, OneToMany, ManyToMany } from "typeorm";
 
@@ -33,4 +34,10 @@ export class User {
 
     @ManyToMany(() => Role, (rol) => rol.rolesAsignados)
     roles: Role[];
+
+    @OneToMany(() => Reserva, reserva => reserva.cliente)
+    reservasCliente: Reserva[];
+
+    @OneToMany(() => Reserva, reserva => reserva.guia)
+    reservasGuia: Reserva[];
 }

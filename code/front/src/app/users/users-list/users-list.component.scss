@@ -1,5 +1,5 @@
 .bg-admin{
-  background: linear-gradient(to bottom, #004a1e,#006428);
+  background: linear-gradient(to bottom, #013c19,#006428);
 }
 
 .tittle-color{
@@ -8,8 +8,9 @@
 }
 
 .bg-header-table{
-  background-color: #004a1e !important;
-  color: #97BF1E;
+  background-color: #c1e457 !important;
+  color: #2b2e20;
+  font-size: 1rem;
 }
 .bg-add-button{
   background-color: #e9f8bd !important;
@@ -18,10 +19,9 @@
   font-size: large;
 }
 .user-header {
-  background: linear-gradient(to bottom, #daeeb7, #e8f5e9); // blanco a verde muy claro
-  border-left: 5px solid #388e3c; // verde intenso para acento
-  border-right: 5px solid #388e3c;;
+  //background: linear-gradient(to bottom, #daeeb7, #e8f5e9); // blanco a verde muy claro
+  //border-left: 5px solid #014e05; // verde intenso para acento
+ // border-right: 5px solid #388e3c;;
   padding: 1.5rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
 }
