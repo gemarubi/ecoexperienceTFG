@@ -25,7 +25,7 @@ export class Ruta {
   precio: number;
 
   @Column()
-  duracion: number; // en minutos
+  duracion: number; 
 
   @ManyToMany(() => Reserva, reserva => reserva.rutas)
   reservas: Reserva[];

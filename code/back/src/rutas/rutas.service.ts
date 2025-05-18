@@ -1,26 +1,74 @@
-import { Injectable } from '@nestjs/common';
-import { CreateRutaDto } from './dto/create-ruta.dto';
-import { UpdateRutaDto } from './dto/update-ruta.dto';
+
+import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
+import { SugerenciaRutaDto } from './dto/sugerencias-ruta.dto';
+import { Ruta } from './entities/ruta.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Between, LessThanOrEqual, MoreThanOrEqual, Repository } from 'typeorm';
 
 @Injectable()
 export class RutasService {
-  create(createRutaDto: CreateRutaDto) {
-    return 'This action adds a new ruta';
+  private readonly logger = new Logger('RutasService');
+
+  constructor(
+    @InjectRepository(Ruta)
+    private readonly rutasRepository: Repository<Ruta>,
+
+  ) { }
+
+  async findAll() {
+    try {
+      return await this.rutasRepository.find({
+
+      });
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException('Error al obtener rutas');
+    }
   }
 
-  findAll() {
-    return `This action returns all rutas`;
+  async findOne(id: number) {
+    try {
+      return await this.rutasRepository.find({ where: { id: id } });
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException('Ruta no encontrada');
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} ruta`;
+  async verSugerencias(sugerenciasRutaDto: SugerenciaRutaDto) {
+    try {
+      if (sugerenciasRutaDto.tipo == "Tuk Tuk") {
+        return await this.rutasRepository.find({ where: { tipo: "Tuk Tuk" } });
+      } else {
+        const rutasPosibles = await this.rutasRepository.find(
+          {
+            where:
+            {
+              tipo: "A pie",
+              precio: LessThanOrEqual(sugerenciasRutaDto.precioMax),
+              duracion: Between(sugerenciasRutaDto.duracionMin, sugerenciasRutaDto.duracionMax)
+            }
+          })
+        const rutasPreferentes: Ruta[] = [];
+
+        rutasPosibles.forEach(ruta => {
+          sugerenciasRutaDto.preferencias.forEach(pref => {
+            if (ruta.descripcion.toLowerCase().includes(pref.toLowerCase())) {
+              const yaIncluida = rutasPreferentes.find(r => r.id === ruta.id);
+              if (!yaIncluida) {
+                rutasPreferentes.push(ruta);
+              }
+            }
+          });
+        });
+
+        return rutasPreferentes;
+      }
+
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException('Ruta no encontrada');
+    }
   }
 
-  update(id: number, updateRutaDto: UpdateRutaDto) {
-    return `This action updates a #${id} ruta`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} ruta`;
-  }
 }
