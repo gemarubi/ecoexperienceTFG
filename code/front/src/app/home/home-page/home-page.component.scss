@@ -1,0 +1,11 @@
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.intro {
+  background-position: center top 53%;
+  background-image: linear-gradient(280deg, rgba(255, 255, 255, 0) 0%, #000000 100%), url(https://cordobaecoexperience.es/wp-content/uploads/2024/06/head.jpg) !important;
+  height: 440px;
+
+}

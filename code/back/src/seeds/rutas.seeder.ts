@@ -11,7 +11,7 @@ export const seedRutas = async (dataSource: DataSource) => {
       subtitulo: 'Recorrido panorámico por los principales monumentos',
       descripcion:
         'Explora la ciudad de Córdoba desde una perspectiva única a bordo de un tuk-tuk eléctrico. Visita lugares emblemáticos como la Plaza de las Tendillas, el Templo Romano, la Plaza de la Corredera, el Puente Romano, la Torre de la Calahorra y la Puerta del Puente, acompañado por un guía profesional.',
-      imagen: 'https://cordobaecoexperience.es/images/tuk-tuk-tour.jpg',
+      imagen: 'https://i0.wp.com/cordobaecoexperience.es/wp-content/uploads/2024/06/free-tour.jpg?w=800&ssl=1',
       precio: 25.00,
       duracion: 75,
     },

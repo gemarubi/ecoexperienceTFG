@@ -26,6 +26,7 @@ errorMessage: string = ''
         }
       },
       error: (err) => {
+        console.log(err)
         if (err.status === 401) {
           this.errorMessage = 'Error al iniciar sesión. Inténtalo de nuevo.'
         } else {

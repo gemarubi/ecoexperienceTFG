@@ -1,0 +1,48 @@
+.card2 {
+  position: relative;
+  max-width: 325px;
+  //background-color: #000000 !important;
+
+
+  .card-image {
+    position: relative;
+    //box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    //background-color: #000000e6 !important;
+    img {
+      //box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .tipo {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: yellowgreen;
+      color: #000;
+      font-weight: bold;
+      padding: 4px 10px;
+    }
+
+    .info {
+      position: absolute;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      width: 100%;
+      padding: 10px;
+
+      h3 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      p {
+        margin: 0;
+        font-size: 14px;
+      }
+    }
+  }
+}

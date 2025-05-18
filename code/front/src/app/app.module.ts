@@ -7,18 +7,19 @@ import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient } from '@angular
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { SharedModule } from './shared/shared.module';
-import { HomeComponent } from './home/home.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { HomeModule } from './home/home.module';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
+    HomeModule,
     HttpClientModule
   ],
   providers: [
