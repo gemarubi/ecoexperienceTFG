@@ -20,9 +20,12 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli",
     "migration:generate": "yarn typeorm migration:generate src/migrations/InitUserTable -d data-source.ts",
-    "migration:run": "yarn typeorm migration:run -d data-source.ts"
+    "migration:run": "yarn typeorm migration:run -d data-source.ts",
+    "seed": "ts-node src/seeds/seed.ts",
+    "seed:generate": "mkdir -p src/seeds && touch src/seeds/CustomSeeder.ts"
   },
   "dependencies": {
+    "@faker-js/faker": "^9.8.0",
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.0.1",
@@ -39,7 +42,8 @@
     "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
-    "typeorm": "^0.3.22"
+    "typeorm": "^0.3.22",
+    "typeorm-seeding": "^1.6.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
