@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HomeService } from '../home.service';
-import { Ruta } from '../interfaces/ruta';
+import { Filtro, Ruta } from '../interfaces/ruta';
 
 @Component({
   selector: 'app-home-page',
@@ -18,8 +18,18 @@ export class HomePageComponent {
     this.rutasService.getAllRutas().subscribe({
       next: (data) => this.rutas = data,
       error: (err) => console.error('Error al cargar rutas:', err)
-      
+
     });
 
+  }
+
+  onFiltersApplied(filtros: Filtro): void {
+    console.log('Recibido filtros en Home:', filtros);
+
+    this.rutasService.getFiltered( filtros)
+      .subscribe(response => {
+     
+        this.rutas = response;
+      });
   }
 }

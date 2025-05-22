@@ -1,4 +1,26 @@
-<div class="container-fluid intro"></div>
-<div class=" container-fluid grid d-flex justify-content-center mt-5 mb-5">
-  <app-ruta-card *ngFor="let ruta of rutas" [ruta]="ruta"></app-ruta-card>
+<div class="container-fluid intro mb-5 d-flex align-items-center">
+  <div class="container-fluid text-center">
+    <h1>Visitas guiadas en Córdoba</h1>
+    <p class="display-6">Disfruta nuestras rutas a pie o en tuk-tuk</p>
+    <div class="container mt-4">
+  <app-google-review-card></app-google-review-card>
+</div>
+  </div>
+</div>
+
+<div class="container-fluid ms-4 mt-5">
+  <div class="row">
+    <!-- Filtro (lado izquierdo) -->
+    <div class="col-12 col-md-2 mb-4 ms-5 me-5">
+      <app-filter (filtersApplied)="onFiltersApplied($event)"></app-filter>
+    </div>
+
+    <div class="col-12 col-md-8">
+      <div class="row ms-3">
+        <div class="col-12 col-sm-6 col-md-4 mb-4" *ngFor="let ruta of rutas">
+          <app-ruta-card [ruta]="ruta"></app-ruta-card>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

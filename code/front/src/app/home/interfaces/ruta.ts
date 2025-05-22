@@ -8,3 +8,10 @@ export interface Ruta {
   precio:      string;
   duracion:    number;
 }
+export interface Filtro {
+  tipo: string;
+  precioMax: number;
+  duracionMin: number;
+  duracionMax: number;
+  preferencias: string[];
+}

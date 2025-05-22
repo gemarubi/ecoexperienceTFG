@@ -9,9 +9,13 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { SharedModule } from './shared/shared.module';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HomeModule } from './home/home.module';
+
+
 @NgModule({
   declarations: [
     AppComponent,
+
+
 
   ],
   imports: [

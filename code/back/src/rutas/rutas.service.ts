@@ -49,18 +49,21 @@ export class RutasService {
               duracion: Between(sugerenciasRutaDto.duracionMin, sugerenciasRutaDto.duracionMax)
             }
           })
-        const rutasPreferentes: Ruta[] = [];
-
-        rutasPosibles.forEach(ruta => {
-          sugerenciasRutaDto.preferencias.forEach(pref => {
-            if (ruta.descripcion.toLowerCase().includes(pref.toLowerCase())) {
-              const yaIncluida = rutasPreferentes.find(r => r.id === ruta.id);
-              if (!yaIncluida) {
-                rutasPreferentes.push(ruta);
+        let rutasPreferentes: Ruta[] = [];
+        if (sugerenciasRutaDto.preferencias.length > 0) {
+          rutasPosibles.forEach(ruta => {
+            sugerenciasRutaDto.preferencias.forEach(pref => {
+              if (ruta.descripcion.toLowerCase().includes(pref.toLowerCase())) {
+                if (!rutasPreferentes.find(r => r.id === ruta.id)) {
+                  rutasPreferentes.push(ruta);
+                }
               }
-            }
+            });
           });
-        });
+        }else{
+          rutasPreferentes=rutasPosibles
+        }
+
 
         return rutasPreferentes;
       }

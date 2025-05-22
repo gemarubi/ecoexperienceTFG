@@ -1,0 +1,54 @@
+
+.filter-panel {
+  width: 300px;
+  padding: 2rem;
+  background-color: #ffffff;
+}
+.bg-primary-eco{
+  background-color:yellowgreen !important;
+ // color:#dcf29b
+}
+
+.mat-expansion-panel-header {
+  background-color: #f5f5f5;
+  font-weight: 600;
+}
+
+
+.panel-content {
+  padding: 0.5rem 0;
+}
+
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: -4px;
+}
+
+
+mat-radio-button, .mat-mdc-checkbox {
+  display: block;
+  margin: 4px 0;
+}
+
+
+::ng-deep .mdc-slider__track--active_fill {
+  background-color: #4caf50;
+  border: none !important;
+  border-radius: 3px;
+}
+
+
+::ng-deep .mat-mdc-checkbox.mat-mdc-checkbox-checked .mdc-checkbox__background {
+  background-color: #4caf50 !important;
+  border-color: #4caf50 !important;
+}
+.bg-button{
+  background-color: #006428;
+}
+.bg-button:hover{
+   background-color: #4caf50 !important;
+}

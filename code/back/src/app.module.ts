@@ -6,6 +6,8 @@ import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
 import { AuthModule } from './auth/auth.module';
 import { RutasModule } from './rutas/rutas.module';
+import { GoogleReviewsModule } from './google-reviews/google-reviews.module';
+import { HttpModule } from '@nestjs/axios';
 
 
 @Module({
@@ -22,11 +24,14 @@ import { RutasModule } from './rutas/rutas.module';
       database: process.env.DB_DATABASE,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: false,
+      
     }),
     UsersModule,
     RolesModule,
     AuthModule,
-    RutasModule
+    RutasModule,
+    GoogleReviewsModule,
+    HttpModule
   ],
   controllers: [],
   providers: [],

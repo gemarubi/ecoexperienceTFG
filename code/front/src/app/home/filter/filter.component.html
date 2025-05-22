@@ -1,0 +1,62 @@
+<form class="filter-panel rounded shadow" [formGroup]="filterForm" (ngSubmit)="onApplyFilters()">
+
+  <mat-accordion multi>
+    <mat-expansion-panel expanded>
+      <mat-expansion-panel-header class="bg-primary-eco">
+        <mat-panel-title>Tipo</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="panel-content">
+
+        <mat-radio-group formControlName="tipo">
+          <mat-radio-button *ngFor="let t of tipoOptions" [value]="t">
+            {{ t }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </mat-expansion-panel>
+
+   
+
+
+    <mat-expansion-panel expanded>
+      <mat-expansion-panel-header class="bg-primary-eco">
+        <mat-panel-title>Duración (min - max)</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="panel-content">
+
+        <mat-slider min="0" max="300" step="10">
+          <input matSliderStartThumb formControlName="duracionMin" />
+          <input matSliderEndThumb formControlName="duracionMax" />
+        </mat-slider>
+        <div class="slider-labels">
+          <span>{{ filterForm.get('duracionMin')?.value }}min</span>
+          <span>{{ filterForm.get('duracionMax')?.value }}min</span>
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel expanded>
+      <mat-expansion-panel-header class="bg-primary-eco">
+        <mat-panel-title>Preferencias</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="panel-content">
+
+        <div *ngFor="let pref of preferenciasOptions">
+          <mat-checkbox (change)="onPrefChange(pref, $event)"
+                        [checked]="selectedPreferences.includes(pref)">
+            {{ pref }}
+          </mat-checkbox>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+  <div class="actions d-flex justify-content-center mt-2">
+    <button class="bg-button text-light" mat-raised-button color="primary" type="submit">
+      Aplicar Filtros
+    </button>
+  </div>
+
+</form>
