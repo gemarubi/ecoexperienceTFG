@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { RutasModule } from './rutas/rutas.module';
 import { GoogleReviewsModule } from './google-reviews/google-reviews.module';
 import { HttpModule } from '@nestjs/axios';
+import { ReservasModule } from './reservas/reservas.module';
 
 
 @Module({
@@ -31,6 +32,7 @@ import { HttpModule } from '@nestjs/axios';
     AuthModule,
     RutasModule,
     GoogleReviewsModule,
+    ReservasModule,
     HttpModule
   ],
   controllers: [],

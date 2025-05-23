@@ -10,7 +10,7 @@ export class Role {
 
     @ManyToMany(() => User, (user) => user.roles)
     @JoinTable({
-      name: 'roles_asignados', // Nombre de la tabla intermedia en la BD
+      name: 'roles_asignados', 
       joinColumn: { name: 'id_rol', referencedColumnName: 'id' },
       inverseJoinColumn: { name: 'id_user', referencedColumnName: 'id' },
     })
