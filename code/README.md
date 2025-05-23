@@ -33,31 +33,6 @@ Es necesario instalar las dependencias :
 	npm install
 ```
 
-### ↘️ Aplicación ~ Login
-
-1. Navega a la carpeta `login`:
-```bash
-	cd login
-```
-#### ⚙️ Back-end:
-1. Navega a la carpeta `back`: 
-```bash
-	cd back
-```
-2. Instala las dependencias de NodeJS:
-```bash
-	yarn install
-```
-#### 🎨 Front-end:
-1. Navega a la carpeta `front`: 
-```bash
-	cd front
-```
-2. Instala las dependencias de Angular:
-```bash
-	npm install
-```
-
 ### 3️⃣ Configuración del entorno
 
 #### ⚙️ Back-end:
