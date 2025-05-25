@@ -9,6 +9,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { SharedModule } from './shared/shared.module';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HomeModule } from './home/home.module';
+import { RutasModule } from './rutas/rutas.module';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { HomeModule } from './home/home.module';
     BrowserAnimationsModule,
     SharedModule,
     HomeModule,
-    HttpClientModule
+    HttpClientModule,
+    RutasModule
   ],
   providers: [
     provideAnimationsAsync(),

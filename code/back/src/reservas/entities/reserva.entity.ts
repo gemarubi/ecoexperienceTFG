@@ -22,7 +22,7 @@ export class Reserva {
   observaciones: string;
 
   @ManyToOne(() => User, user => user.reservasCliente)
-  cliente: User;
+  cliente?: User;
 
   @ManyToOne(() => User, user => user.reservasGuia)
   guia: User;

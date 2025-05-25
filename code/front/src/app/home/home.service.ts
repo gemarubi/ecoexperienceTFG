@@ -9,16 +9,11 @@ import { environment } from '../../environments/environment.development';
 })
 export class HomeService {
 
-  private apiUrl = environment.apiUrl+'/rutas';
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
-  getAllRutas(): Observable<Ruta[]> {
-    return this.http.get<Ruta[]>(this.apiUrl);
-  }
-   getFiltered(filtros:Filtro): Observable<Ruta[]> {
-    return this.http.post<Ruta[]>(this.apiUrl, filtros);
-  }
+
 
    getRating(): Observable<{ rating: number }> {
     return this.http.get<{ rating: number }>(environment.apiUrl+'/google-reviews');

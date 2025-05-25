@@ -1,0 +1,25 @@
+
+  <mat-card class="calendario-container">
+  <!-- Encabezado de info -->
+  <div class="encabezado">
+    Reserva ahora!!
+  </div>
+
+  <!-- Calendario con filtro -->
+  <mat-calendar
+  [(selected)]="fechaSeleccionada"
+  [dateClass]="resaltarFechasNoDisponibles">
+</mat-calendar>
+
+ <button
+  mat-raised-button
+  class="boton-reservar"
+  [disabled]="esFechaSeleccionadaNoDisponible() || !fechaSeleccionada"
+  (click)="abrirDialogoReserva()">
+  Reservar
+</button>
+
+<div *ngIf="esFechaSeleccionadaNoDisponible()" class="alerta-fecha mt-2">
+  ❌ Esta fecha no está disponible para reservas.
+</div>
+</mat-card>

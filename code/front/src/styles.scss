@@ -2,9 +2,17 @@
 
 html, body { height: 100%;
 }
-body { margin: 0; 
+body { margin: 0;
  }
 .verde-secondary-text{
   color:#dcf29b
 }
+.dia-no-disponible .mat-calendar-body-cell-content {
+  background-color: #ffcdd2;
+  color: #c62828;
+ // border-radius: 50%;
+  font-weight: bold;
+  position: relative;
+}
+
 

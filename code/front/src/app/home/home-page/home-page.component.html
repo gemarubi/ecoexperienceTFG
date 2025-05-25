@@ -22,7 +22,9 @@
     <div class="col-12 col-md-8">
       <div class="row ms-3">
         <div class="col-12 col-sm-6 col-md-4 mb-4" *ngFor="let ruta of rutas">
+          <a [routerLink]="['/rutas/detalle', ruta.id]">
           <app-ruta-card [ruta]="ruta"></app-ruta-card>
+          </a>
         </div>
       </div>
     </div>

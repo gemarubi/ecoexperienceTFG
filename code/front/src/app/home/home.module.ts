@@ -13,17 +13,20 @@ import { RutaCardComponent } from './ruta-card/ruta-card.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { FilterComponent } from './filter/filter.component';
 import { GoogleReviewCardComponent } from './google-review-card/google-review-card.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     RutaCardComponent,
     HomePageComponent,
     FilterComponent,
-    GoogleReviewCardComponent
+    GoogleReviewCardComponent,
+
 
   ],
   imports: [
     CommonModule,
+    RouterModule,
     MatCheckboxModule,
     MatFormFieldModule,
     MatSelectModule,

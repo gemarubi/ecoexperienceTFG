@@ -47,7 +47,7 @@ En este punto puedes recurrir a dos opciones según tu preferencia:
 	yarn typeorm migration:run -d data-source.ts
 	yarn ts-node -r tsconfig-paths/register src/seeds/seed.ts
 ```
-2. Importa la base de datos en tu `phpMyAdmin` con el archivo `.sql` que encontrarás en la carpeta del proyecto `/docs`.
+2. Importa la base de datos en tu `phpMyAdmin` con el archivo `.sql` que encontrarás en la carpeta del proyecto `/code`.
 
 ### 4️⃣ Levanta el proyecto
 Es necesario levantar el back y el front 

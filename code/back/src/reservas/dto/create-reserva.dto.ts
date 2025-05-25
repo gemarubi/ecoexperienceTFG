@@ -16,7 +16,7 @@ export class CreateReservaDto {
     observaciones?: string;
 
     @IsInt()
-    clienteId: number;
+    clienteId?: number;
 
     @IsOptional()
     @IsInt()
