@@ -1,59 +1,59 @@
 .calendario-container {
-  width: 400px;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  font-family: 'Arial', sans-serif;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background-color: #ffffff;
 }
 
 .encabezado {
-  background-color: #006428;
-  color: aliceblue;
-  text-align: center;
-  padding: 10px;
+  font-size: 1.5rem;
   font-weight: 600;
-}
-
-.mat-calendar {
-  padding: 0 16px;
-}
-
-.selector-personas {
-  width: 100%;
-  padding: 0 16px;
-  margin-top: 10px;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
 .boton-reservar {
-  background-color: #006428;
+  margin-top: 1rem;
+  width: 100%;
+  background-color: #4caf50;
   color: white;
-  font-weight: bold;
-  width: calc(100% - 32px);
-  margin: 16px;
-  border-radius: 999px;
-}
-
-.dia-no-disponible .mat-calendar-body-cell-content {
-  background-color: #ffcdd2 !important;
-  color: #c62828;
-  border-radius: 50%;
-  font-weight: bold;
-  position: relative;
-}
-
-.dia-no-disponible .mat-calendar-body-cell-content::after {
-  content: "✖";
-  font-size: 0.8em;
-  position: absolute;
-  top: 2px;
-  right: 4px;
 }
 
 .alerta-fecha {
-  color: #c62828;
-  background: #fdecea;
-  padding: 10px;
-  border-radius: 8px;
-  font-weight: 500;
+  color: red;
+  font-weight: 600;
+  margin-top: 1rem;
   text-align: center;
+}
+
+.franjas-wrapper {
+  margin-top: 2rem;
+}
+
+.titulo-franjas {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.franjas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 10px;
+}
+
+.franja {
+  padding: 8px;
+  text-align: center;
+  border-radius: 6px;
+  font-weight: 500;
+  user-select: none;
+}
+
+.franja-libre {
+  background-color: #c8e6c9;
+  color: #1b5e20;
+}
+
+.franja-ocupada {
+  background-color: #da8d8d;
+  color: #666;
 }

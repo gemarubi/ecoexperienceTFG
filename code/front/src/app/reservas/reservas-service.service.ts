@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { Reserva } from './interface/interface';
+import { Intervalo, Reserva } from './interface/interface';
 import { FormGroup } from '@angular/forms';
 
 @Injectable({
@@ -13,8 +13,9 @@ export class ReservasServiceService {
 
   constructor(private http: HttpClient) {}
 
-  getDiasOcupados(rutaTipo:string) {
-    return this.http.get<string[]>(this.apiUrl+'/nodisponibles/'+rutaTipo);
+  getIntervalosOcupados(rutaTipo:string) {
+    console.log(rutaTipo)
+    return this.http.get<Intervalo[]>(this.apiUrl+'/nodisponibles/'+rutaTipo);
   }
   createReserva(reserva:Reserva){
 

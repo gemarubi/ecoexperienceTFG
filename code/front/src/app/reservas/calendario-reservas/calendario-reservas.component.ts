@@ -10,60 +10,140 @@ import { CrearReservaDialogComponent } from '../crear-reserva-dialog/crear-reser
   templateUrl: './calendario-reservas.component.html',
   styleUrl: './calendario-reservas.component.scss'
 })
-export class CalendarioReservasComponent implements OnInit{
- fechaSeleccionada: Date | null = null;
-fechasNoDisponibles: string[] = [];
+export class CalendarioReservasComponent implements OnInit {
+  @Input() tipoRuta: string = '';
+  @Input() rutaId: number | null = null;
 
-@Input() tipoRuta: string = '';
-@Input() rutaId: number | null = null;
+  fechaSeleccionadaInterna: Date | null = null;
+  get fechaSeleccionada(): Date | null {
+    return this.fechaSeleccionadaInterna;
+  }
+  set fechaSeleccionada(value: Date | null) {
+    this.fechaSeleccionadaInterna = value;
+    this.actualizarFranjasPorFecha();
+  }
 
-constructor(private reservasService: ReservasServiceService, private dialog: MatDialog) {}
+  intervalosOcupados: { fecha: string; desde: string; hasta: string }[] = [];
+  fechasNoDisponibles: string[] = [];
+  franjasHorarias: { hora: string; disponible: boolean }[] = [];
 
-ngOnInit(): void {
-  this.cargarFechasNoDisponibles();
-}
+  constructor(
+    private reservasService: ReservasServiceService,
+    private dialog: MatDialog
+  ) { }
 
-cargarFechasNoDisponibles(): void {
-  this.reservasService.getDiasOcupados(this.tipoRuta).subscribe({
-    next: (fechas) => {
-      this.fechasNoDisponibles = fechas;
-      console.log(this.fechasNoDisponibles)
-    },
-    error: (err) => {
-      console.error('Error al cargar fechas no disponibles', err);
+  ngOnInit(): void {
+    console.log('Tipo de ruta recibido en componente:', this.tipoRuta);
+    this.cargarIntervalosOcupados();
+  }
+
+  cargarIntervalosOcupados(): void {
+    this.reservasService.getIntervalosOcupados(this.tipoRuta).subscribe({
+      next: (data) => {
+        this.intervalosOcupados = data;
+        console.log(data)
+
+        const agrupados: Record<string, number> = {};
+        data.forEach(i => {
+          agrupados[i.fecha] = (agrupados[i.fecha] || 0) + 1;
+        });
+
+        const UMBRAL_BLOQUEO = 10;
+        this.fechasNoDisponibles = Object.entries(agrupados)
+          .filter(([_, count]) => count >= UMBRAL_BLOQUEO)
+          .map(([fecha]) => fecha);
+
+        this.actualizarFranjasPorFecha();
+      },
+      error: (err) => {
+        console.error('Error al cargar intervalos ocupados', err);
+      }
+    });
+  }
+
+  actualizarFranjasPorFecha(): void {
+     if (!this.fechaSeleccionada || !this.intervalosOcupados) return;
+
+
+
+  const fechaStr = this.obtenerFechaLocalISO(this.fechaSeleccionada);
+  const ocupadas = this.intervalosOcupados.filter(i => i.fecha === fechaStr);
+
+  console.log('🔍 Intervalos ocupados para', fechaStr, ocupadas);
+
+  const franjas: { hora: string; disponible: boolean }[] = [];
+  const inicio = 8;
+  const fin = 21;
+  const paso = 30;
+
+  for (let h = inicio; h < fin; h++) {
+    for (let m of [0, 30]) {
+      const hora = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+      const inicioF = this.parseHora(fechaStr, hora);
+      const finF = new Date(inicioF.getTime() + paso * 60000);
+
+      let disponible = true;
+
+      ocupadas.forEach(b => {
+        const desde = this.parseHora(b.fecha, b.desde);
+        const hasta = this.parseHora(b.fecha, b.hasta);
+
+        if (inicioF < hasta && finF > desde) {
+          console.log(`🔴 BLOQUE OCUPADO: ${hora}`);
+          disponible = false;
+        }
+      });
+
+      franjas.push({ hora, disponible });
     }
-  });
-}
+  }
 
-resaltarFechasNoDisponibles = (d: Date): string => {
-  const fechaStr = d.toLocaleDateString('en-CA');
-  return this.fechasNoDisponibles.includes(fechaStr) ? 'dia-no-disponible' : '';
-};
+  this.franjasHorarias = franjas;
+  }
 
-esFechaSeleccionadaNoDisponible(): boolean {
-  if (!this.fechaSeleccionada) return false;
+ obtenerFechaLocalISO = (fecha: Date): string => {
+    const year = fecha.getFullYear();
+    const month = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    const day = fecha.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
 
-  const hoy = new Date();
-  hoy.setHours(0, 0, 0, 0);
 
-  const fechaSeleccionada = new Date(this.fechaSeleccionada);
-  fechaSeleccionada.setHours(0, 0, 0, 0);
+parseHora = (fecha: string, hora: string): Date => {
+    const [h, m] = hora.split(':').map(Number);
+    const [year, month, day] = fecha.split('-').map(Number);
+    return new Date(year, month - 1, day, h, m);
+  };
+  resaltarFechasNoDisponibles = (d: Date): string => {
+    const fechaStr = d.toLocaleDateString('en-CA');
+    return this.fechasNoDisponibles.includes(fechaStr) ? 'dia-no-disponible' : '';
+  };
 
-  const esPasada = fechaSeleccionada < hoy;
-  const fechaStr = this.fechaSeleccionada.toLocaleDateString('en-CA');
+  esFechaSeleccionadaNoDisponible(): boolean {
+    if (!this.fechaSeleccionada) return false;
 
-  return esPasada || this.fechasNoDisponibles.includes(fechaStr);
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
 
-}
-abrirDialogoReserva(): void {
-  if (!this.fechaSeleccionada || !this.rutaId) return;
+    const seleccion = new Date(this.fechaSeleccionada);
+    seleccion.setHours(0, 0, 0, 0);
 
-  this.dialog.open(CrearReservaDialogComponent, {
-    width: '400px',
-    data: {
-      fecha: this.fechaSeleccionada,
-      rutaId: this.rutaId
-    }
-  });
-}
+    const fechaStr = seleccion.toISOString().split('T')[0];
+    const esPasada = seleccion < hoy;
+
+    return esPasada || this.fechasNoDisponibles.includes(fechaStr);
+  }
+
+  abrirDialogoReserva(): void {
+    if (!this.fechaSeleccionada || !this.rutaId) return;
+
+    this.dialog.open(CrearReservaDialogComponent, {
+      width: '400px',
+      data: {
+        fecha: this.fechaSeleccionada,
+        rutaId: this.rutaId
+      }
+    });
+  }
+
 }

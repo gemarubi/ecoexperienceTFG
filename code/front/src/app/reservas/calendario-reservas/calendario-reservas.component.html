@@ -1,25 +1,44 @@
-
-  <mat-card class="calendario-container">
-  <!-- Encabezado de info -->
+<mat-card class="calendario-container">
+  <!-- Encabezado -->
   <div class="encabezado">
-    Reserva ahora!!
+    ¡Reserva ahora!
   </div>
 
-  <!-- Calendario con filtro -->
+  <!-- Calendario -->
   <mat-calendar
-  [(selected)]="fechaSeleccionada"
-  [dateClass]="resaltarFechasNoDisponibles">
-</mat-calendar>
+    [(selected)]="fechaSeleccionada"
+    [dateClass]="resaltarFechasNoDisponibles">
+  </mat-calendar>
 
- <button
-  mat-raised-button
-  class="boton-reservar"
-  [disabled]="esFechaSeleccionadaNoDisponible() || !fechaSeleccionada"
-  (click)="abrirDialogoReserva()">
-  Reservar
-</button>
+  <!-- Botón de reservar -->
+  <button
+    mat-raised-button
+    class="boton-reservar"
+    [disabled]="esFechaSeleccionadaNoDisponible() || !fechaSeleccionada"
+    (click)="abrirDialogoReserva()">
+    Reservar
+  </button>
 
-<div *ngIf="esFechaSeleccionadaNoDisponible()" class="alerta-fecha mt-2">
-  ❌ Esta fecha no está disponible para reservas.
-</div>
+  <!-- Alerta si la fecha está bloqueada -->
+  <div *ngIf="esFechaSeleccionadaNoDisponible()" class="alerta-fecha mt-2">
+    ❌ Esta fecha no está disponible para reservas.
+  </div>
+
+  <!-- Franja horaria -->
+  <div *ngIf="franjasHorarias.length && fechaSeleccionada" class="franjas-wrapper">
+    <h4 class="titulo-franjas">
+      Disponibilidad horaria para {{ fechaSeleccionada | date: 'fullDate' }}
+    </h4>
+    <div class="franjas-grid">
+      <div
+        *ngFor="let franja of franjasHorarias"
+        class="franja"
+        [ngClass]="{
+          'franja-libre': franja.disponible,
+          'franja-ocupada': !franja.disponible
+        }">
+        {{ franja.hora }}
+      </div>
+    </div>
+  </div>
 </mat-card>

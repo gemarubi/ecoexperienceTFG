@@ -45,3 +45,9 @@ export interface Reserva {
   asistentes:    number;
   observaciones: string;
 }
+export interface Intervalo {
+  fecha: string;
+  desde: string;
+  hasta: string;
+}
+
