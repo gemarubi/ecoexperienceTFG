@@ -11,13 +11,17 @@ import { MatCardModule } from '@angular/material/card';
 import { CrearReservaDialogComponent } from './crear-reserva-dialog/crear-reserva-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { ReservasListComponent } from './reservas-list/reservas-list.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
   declarations: [
     CalendarioReservasComponent,
-    CrearReservaDialogComponent
+    CrearReservaDialogComponent,
+    ReservasListComponent
   ],
   imports: [
     CommonModule,
@@ -30,10 +34,14 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSelectModule,
     MatCardModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+     MatTableModule,
+    MatIconModule,
+    MatTooltipModule
   ],
   exports:[
-  CalendarioReservasComponent
+  CalendarioReservasComponent,
+  ReservasListComponent
   ]
 })
 export class ReservasModule { }

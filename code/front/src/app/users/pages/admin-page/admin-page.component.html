@@ -1,0 +1,28 @@
+<div class="admin-page-container">
+ <div class="admin-page-container">
+  <mat-toolbar color="primary" class="admin-toolbar ">
+    <button class="fs-5"
+      mat-button
+      routerLink="users-list"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Usuarios
+    </button>
+    <button  class="fs-5"
+      mat-button
+      routerLink="reservas"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Reservas
+    </button>
+    <button  class="fs-5" mat-button disabled>Rutas</button>
+    <button  class="fs-5" mat-button disabled>Blog</button>
+  </mat-toolbar>
+
+
+  <div class="contenido mt-4">
+    <router-outlet></router-outlet>
+  </div>
+</div>

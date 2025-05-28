@@ -18,15 +18,19 @@ import { MatOptionModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatInputModule } from '@angular/material/input';
+import { AdminPageComponent } from './pages/admin-page/admin-page.component';
+import { ReservasModule } from '../reservas/reservas.module';
 
 
 @NgModule({
   declarations: [
     UsersListComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    AdminPageComponent
   ],
   imports: [
     CommonModule,
+    ReservasModule,
     UsersRoutingModule,
     MatTableModule,
     MatCardModule,

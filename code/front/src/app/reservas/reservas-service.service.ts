@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { Intervalo, Reserva } from './interface/interface';
+import { Intervalo, Reserva, ReservasList } from './interface/interface';
 import { FormGroup } from '@angular/forms';
 
 @Injectable({
@@ -20,5 +20,10 @@ export class ReservasServiceService {
   createReserva(reserva:Reserva){
     console.log(reserva)
     return this.http.post<FormGroup>(this.apiUrl,reserva)
+  }
+
+   getReservas() {
+
+    return this.http.get<ReservasList[]>(this.apiUrl);
   }
 }

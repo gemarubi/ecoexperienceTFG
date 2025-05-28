@@ -38,16 +38,25 @@ export interface TukTuk {
   reservas:  Reserva[];
 }
 
-export interface Reserva {
-  id:            number;
-  fecha:         Date;
-  hora:          string;
-  asistentes:    number;
-  observaciones: string;
-}
+
 export interface Intervalo {
   fecha: string;
   desde: string;
   hasta: string;
 }
+
+
+export interface ReservasList {
+  id:            number;
+  fecha:        string;
+  hora:          string;
+  asistentes:    number;
+  observaciones: string;
+  clienteNombre:  string;
+  rutas:         Ruta[];
+  tukTuks:       string[];
+}
+
+
+
 

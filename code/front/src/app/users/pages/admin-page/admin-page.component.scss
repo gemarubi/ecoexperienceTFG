@@ -1,0 +1,19 @@
+mat-toolbar {
+background: linear-gradient(to bottom, #013c19,#006428);
+  border-radius: 8px;
+}
+
+mat-toolbar button {
+  color: white;
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+mat-toolbar button[disabled] {
+  opacity: 0.4;
+}
+
+.active-link {
+  border-bottom: 2px solid white;
+  font-weight: bold;
+}
