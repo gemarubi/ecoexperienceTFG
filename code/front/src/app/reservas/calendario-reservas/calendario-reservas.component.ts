@@ -3,6 +3,8 @@ import { FormControl } from '@angular/forms';
 import { ReservasServiceService } from '../reservas-service.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CrearReservaDialogComponent } from '../crear-reserva-dialog/crear-reserva-dialog.component';
+import { DateAdapter } from '@angular/material/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-calendario-reservas',
@@ -26,15 +28,18 @@ export class CalendarioReservasComponent implements OnInit {
   intervalosOcupados: { fecha: string; desde: string; hasta: string }[] = [];
   fechasNoDisponibles: string[] = [];
   franjasHorarias: { hora: string; disponible: boolean }[] = [];
-
+  franjaSeleccionada: string | null = null;
   constructor(
     private reservasService: ReservasServiceService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private dateAdapter: DateAdapter<Date>,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     console.log('Tipo de ruta recibido en componente:', this.tipoRuta);
     this.cargarIntervalosOcupados();
+     this.dateAdapter.setLocale('es');
   }
 
   cargarIntervalosOcupados(): void {
@@ -135,15 +140,33 @@ parseHora = (fecha: string, hora: string): Date => {
   }
 
   abrirDialogoReserva(): void {
-    if (!this.fechaSeleccionada || !this.rutaId) return;
+     const token = sessionStorage.getItem('token');
+
+  if (!token) {
+    this.router.navigate(['/login']);
+    return;
+  }
+    if (!this.fechaSeleccionada || !this.rutaId || !this.franjaSeleccionada) return;
 
     this.dialog.open(CrearReservaDialogComponent, {
       width: '400px',
       data: {
         fecha: this.fechaSeleccionada,
+        hora: this.franjaSeleccionada,
         rutaId: this.rutaId
       }
     });
   }
+
+  seleccionarFranja(franja: { hora: string; disponible: boolean }): void {
+  if (!franja.disponible) return;
+  this.franjaSeleccionada = franja.hora;
+}
+
+sumarMinutos(hora: string, minutos: number): string {
+  const [h, m] = hora.split(':').map(Number);
+  const date = new Date(0, 0, 0, h, m + minutos);
+  return date.toTimeString().slice(0, 5);
+}
 
 }

@@ -10,11 +10,15 @@ import { SharedModule } from './shared/shared.module';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HomeModule } from './home/home.module';
 import { RutasModule } from './rutas/rutas.module';
-
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
 
 @NgModule({
+
   declarations: [
     AppComponent,
+
 
 
 
@@ -29,6 +33,7 @@ import { RutasModule } from './rutas/rutas.module';
     RutasModule
   ],
   providers: [
+    { provide: LOCALE_ID, useValue: 'es' },
     provideAnimationsAsync(),
     provideHttpClient(),
     provideNativeDateAdapter(),
@@ -41,6 +46,8 @@ import { RutasModule } from './rutas/rutas.module';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
 
 
+export class AppModule {
+}
+  registerLocaleData(localeEs)

@@ -18,7 +18,7 @@ export class ReservasServiceService {
     return this.http.get<Intervalo[]>(this.apiUrl+'/nodisponibles/'+rutaTipo);
   }
   createReserva(reserva:Reserva){
-
+    console.log(reserva)
     return this.http.post<FormGroup>(this.apiUrl,reserva)
   }
 }

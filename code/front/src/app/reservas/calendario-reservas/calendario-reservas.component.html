@@ -1,23 +1,16 @@
 <mat-card class="calendario-container">
   <!-- Encabezado -->
-  <div class="encabezado">
-    ¡Reserva ahora!
-  </div>
+ <div class="encabezado-header">
+  <h2>¡Reserva ahora!</h2>
+</div>
 
   <!-- Calendario -->
-  <mat-calendar
-    [(selected)]="fechaSeleccionada"
-    [dateClass]="resaltarFechasNoDisponibles">
-  </mat-calendar>
-
-  <!-- Botón de reservar -->
-  <button
-    mat-raised-button
-    class="boton-reservar"
-    [disabled]="esFechaSeleccionadaNoDisponible() || !fechaSeleccionada"
-    (click)="abrirDialogoReserva()">
-    Reservar
-  </button>
+  <div class="calendar-wrapper">
+    <mat-calendar
+      [(selected)]="fechaSeleccionada"
+      [dateClass]="resaltarFechasNoDisponibles">
+    </mat-calendar>
+  </div>
 
   <!-- Alerta si la fecha está bloqueada -->
   <div *ngIf="esFechaSeleccionadaNoDisponible()" class="alerta-fecha mt-2">
@@ -29,16 +22,26 @@
     <h4 class="titulo-franjas">
       Disponibilidad horaria para {{ fechaSeleccionada | date: 'fullDate' }}
     </h4>
-    <div class="franjas-grid">
+
+    <div *ngIf="!esFechaSeleccionadaNoDisponible()" class="franjas-container">
       <div
         *ngFor="let franja of franjasHorarias"
         class="franja"
-        [ngClass]="{
-          'franja-libre': franja.disponible,
-          'franja-ocupada': !franja.disponible
-        }">
-        {{ franja.hora }}
+        [class.ocupada]="!franja.disponible"
+        [class.seleccionada]="franjaSeleccionada === franja.hora"
+        (click)="seleccionarFranja(franja)">
+        {{ franja.hora }} - {{ sumarMinutos(franja.hora, 30) }}
       </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <button
+        mat-raised-button
+        class="boton-reservar"
+        [disabled]="esFechaSeleccionadaNoDisponible() || !franjaSeleccionada"
+        (click)="abrirDialogoReserva()">
+        Reservar
+      </button>
     </div>
   </div>
 </mat-card>

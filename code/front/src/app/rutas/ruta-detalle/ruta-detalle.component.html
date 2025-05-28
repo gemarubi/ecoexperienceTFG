@@ -5,16 +5,16 @@
 </div>
 
 <!-- Contenedor principal con dos columnas -->
-<div class="container mt-5 d-flex flex-column flex-lg-row gap-4">
+<div class="container-fluid  mt-5 d-flex flex-column flex-lg-row gap-4">
 
   <!-- Columna izquierda: calendario -->
-  <div class="flex-shrink-0" style="min-width: 500px;">
+  <div class="flex-shrink-0 ms-5 me-5" style="min-width: 500px;">
     <app-calendario-reservas [tipoRuta]="ruta.tipo" [rutaId]="ruta.id"></app-calendario-reservas>
   </div>
 
   <!-- Columna derecha: contenido de la ruta -->
   <div class="flex-grow-1">
-    <h2 class="text-primary display-4 text-success">{{ ruta.subtitulo }}</h2>
+    <h2 class="text-primary display-4 text-success mt-3">{{ ruta.subtitulo }}</h2>
 
     <div class="d-flex flex-wrap gap-3 mt-3 mb-4 info-boxes">
       <span class="badge bg-success fs-6">{{ ruta.precio === '0.00' ? 'Free Tour' : '💰 '+ruta.precio + ' €' }}</span>

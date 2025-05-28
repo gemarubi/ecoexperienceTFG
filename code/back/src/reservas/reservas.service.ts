@@ -23,7 +23,30 @@ export class ReservasService {
     @InjectRepository(TukTuk)
     private readonly tuktuksRepository: Repository<TukTuk>
   ) { }
+
+  async getAllReservas(){
+    try {
+     const reservas = await this.reservasRepository.find({
+    relations: ['cliente', 'tukTuks', 'rutas'],
+    order: { fecha: 'ASC', hora: 'ASC' },
+  });
+
+  return reservas.map(res => ({
+    id: res.id,
+    fecha: res.fecha,
+    hora: res.hora,
+    asistentes: res.asistentes,
+    observaciones: res.observaciones,
+    clienteNombre: res.cliente ,
+    rutas: res.rutas.map(r => r.titulo),
+    tukTuks: res.tukTuks.map(t => t.matricula),
+  }));
+    } catch (error) {
+      return error
+    }
+  }
   async create(createReservaDto: CreateReservaDto, user:number) {
+    console.log(createReservaDto)
     const {
       fecha,
       hora,

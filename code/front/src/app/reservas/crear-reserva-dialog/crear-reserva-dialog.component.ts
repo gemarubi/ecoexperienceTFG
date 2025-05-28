@@ -3,6 +3,7 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ReservasServiceService } from '../reservas-service.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-crear-reserva-dialog',
@@ -17,11 +18,12 @@ export class CrearReservaDialogComponent {
     private fb: FormBuilder,
     private reservasService:ReservasServiceService,
     private dialogRef: MatDialogRef<CrearReservaDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { fecha: Date, rutaId: number }
+     private snackBar: MatSnackBar,
+    @Inject(MAT_DIALOG_DATA) public data: { fecha: Date, rutaId: number, hora:string }
   ) {
     this.reservaForm = this.fb.group({
-      fecha: [data.fecha.toISOString().split('T')[0], Validators.required],
-      hora: ['08:00', Validators.required],
+     fecha: [this.formatearFechaEsp(data.fecha), Validators.required],
+      hora: [data.hora, Validators.required],
       asistentes: [1, [Validators.required, Validators.min(1)]],
       observaciones: [''],
       clienteId: [1, Validators.required],
@@ -30,11 +32,26 @@ export class CrearReservaDialogComponent {
     });
   }
 
+  formatearFechaEsp(fecha: Date): string {
+  const day = fecha.getDate().toString().padStart(2, '0');
+  const month = (fecha.getMonth() + 1).toString().padStart(2, '0');
+  const year = fecha.getFullYear();
+  return `${day}/${month}/${year}`;
+}
   enviarReserva(): void {
-   if (this.reservaForm.invalid) return;
+  if (this.reservaForm.invalid) return;
 
-  this.reservasService.createReserva(this.reservaForm.value).subscribe({
+
+  const fechaConvertida = this.convertirFecha(this.reservaForm.value.fecha);
+
+  const reserva = {
+    ...this.reservaForm.value,
+    fecha: fechaConvertida,
+  };
+
+  this.reservasService.createReserva(reserva).subscribe({
     next: (res) => {
+      this.snackBar.open('Reserva creada correctamente', 'Cerrar', { duration: 3000 });
       this.dialogRef.close({
         reserva: res,
         message: "Reserva creada correctamente"
@@ -42,8 +59,13 @@ export class CrearReservaDialogComponent {
     },
     error: (err) => {
       console.error('Error al crear reserva:', err);
-
+      this.snackBar.open('Hubo un error al crear la reserva', 'Cerrar', { duration: 3000 });
     }
   });
+}
+
+convertirFecha(fecha: string): string {
+  const partes = fecha.split('/');
+  return `${partes[2]}-${partes[1]}-${partes[0]}`; 
 }
 }

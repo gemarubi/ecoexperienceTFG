@@ -1,21 +1,42 @@
 .calendario-container {
-  padding: 1.5rem;
-  border-radius: 1rem;
-  background-color: #ffffff;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
 }
 
-.encabezado {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
-.boton-reservar {
-  margin-top: 1rem;
+.calendar-wrapper {
   width: 100%;
-  background-color: #4caf50;
-  color: white;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+mat-calendar {
+
+  width: 100%;
+}
+
+.encabezado-header {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(90deg, #43a047, #66bb6a);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(67, 160, 71, 0.3);
+  text-align: center;
+
+  h2 {
+    color: white;
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
 }
 
 .alerta-fecha {
@@ -27,33 +48,76 @@
 
 .franjas-wrapper {
   margin-top: 2rem;
+  width: 100%;
 }
 
 .titulo-franjas {
   font-size: 1.2rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
-.franjas-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+.franjas-container {
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
+  justify-content: center;
 }
 
 .franja {
-  padding: 8px;
+  padding: 8px 0;
+  width: 120px; // ancho fijo para todas
   text-align: center;
   border-radius: 6px;
   font-weight: 500;
+  background: #e6f4ff;
+  border: 1px solid #90caf9;
+  cursor: pointer;
+  transition: all 0.2s ease;
   user-select: none;
+  box-sizing: border-box;
+}
+.franja:hover{
+  background-color: #43a047;
+  color:aliceblue
 }
 
-.franja-libre {
-  background-color: #c8e6c9;
-  color: #1b5e20;
+.franja.ocupada {
+  background: #ffebee;
+  border-color: #f44336;
+  color: #f44336;
+  cursor: not-allowed;
+  text-decoration: line-through;
 }
 
-.franja-ocupada {
-  background-color: #da8d8d;
-  color: #666;
+.franja.seleccionada {
+  background: #a3eaa5;
+  border-color: #4caf50;
+  font-weight: bold;
+}
+
+.boton-reservar {
+  margin-top: 2rem;
+  background-color: #4caf50;
+  color: white;
+  width: 60%;
+}
+.boton-reservar:hover{
+  background-color: #2d8431;
+
+}
+
+@media (max-width: 480px) {
+  .calendario-container {
+    padding: 1rem;
+  }
+
+  .franja {
+    min-width: 70px;
+    font-size: 0.8rem;
+  }
+
+  .boton-reservar {
+    width: 100%;
+  }
 }
