@@ -4,6 +4,7 @@ import { SugerenciaRutaDto } from './dto/sugerencias-ruta.dto';
 import { Ruta } from './entities/ruta.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Between, LessThanOrEqual, MoreThanOrEqual, Repository } from 'typeorm';
+import { CreateReservaDto } from 'src/reservas/dto/create-reserva.dto';
 
 @Injectable()
 export class RutasService {
@@ -34,6 +35,7 @@ export class RutasService {
       throw new InternalServerErrorException('Ruta no encontrada');
     }
   }
+
 
   async verSugerencias(sugerenciasRutaDto: SugerenciaRutaDto) {
     try {

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, ManyToMany, JoinTable, JoinColumn } from 'typeorm';
 import { Ruta } from '../../rutas/entities/ruta.entity';
 import { User } from 'src/users/entities/user.entity';
 import { TukTuk } from 'src/tuktuks/entities/tuktuk.entity';
@@ -21,10 +21,12 @@ export class Reserva {
   @Column({ nullable: true })
   observaciones: string;
 
-  @ManyToOne(() => User, user => user.reservasCliente)
-  cliente?: User;
+  @ManyToOne(() => User, user => user.reservasCliente, { nullable: false })
+  @JoinColumn({ name: 'clienteId' })
+  cliente: User;
 
-  @ManyToOne(() => User, user => user.reservasGuia)
+  @ManyToOne(() => User, user => user.reservasGuia, { nullable: true })
+  @JoinColumn({ name: 'guiaId' })
   guia: User;
 
   @ManyToMany(() => Ruta, ruta => ruta.reservas)
@@ -42,5 +44,7 @@ export class Reserva {
     inverseJoinColumn: { name: 'matricula_tuk_tuk', referencedColumnName: 'matricula' }
   })
   tukTuks: TukTuk[];
+
+
 }
 

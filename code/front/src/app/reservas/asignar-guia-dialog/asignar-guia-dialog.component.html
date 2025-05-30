@@ -1,0 +1,20 @@
+
+<div class="dialog-header">
+  <h2 class="text-light text-center fs-2" mat-dialog-title>Asignar Guía</h2>
+</div>
+
+<mat-dialog-content class="bg-dialog">
+  <div class="container border bg-light shadow">
+ <mat-radio-group [(ngModel)]="guiaSeleccionadoId">
+    <mat-radio-button *ngFor="let guia of data.guias" [value]="guia.id" class="d-block mb-2">
+      {{ guia.nombre }} {{ guia.apellidos }}
+    </mat-radio-button>
+  </mat-radio-group>
+  </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions class="bg-dialog" align="center">
+  <button mat-fab extended class="bg-light text-danger" (click)="cancelar()">Cancelar</button>
+  <button mat-fab extended class="bg-light text-success" [disabled]="!guiaSeleccionadoId" (click)="asignar(data.idReserva)">Asignar</button>
+</mat-dialog-actions>

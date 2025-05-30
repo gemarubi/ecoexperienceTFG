@@ -16,13 +16,13 @@ export class UsersService {
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>,
     @InjectRepository(Role)
-    private readonly rolesRepository: Repository<Role>, 
-  ) {}
+    private readonly rolesRepository: Repository<Role>,
+  ) { }
 
- 
+
   async create(createUserDto: CreateUserDto) {
     try {
-      const { pass,roles, ...userData } = createUserDto;
+      const { pass, roles, ...userData } = createUserDto;
       const hashedPassword = await bcrypt.hash(pass, 10);
       const rolesEntities = await this.rolesRepository.findBy({ id: In(roles) });
       const user = this.usersRepository.create({
@@ -50,7 +50,20 @@ export class UsersService {
     }
   }
 
+  async findGuias(): Promise<User[]> {
+    try {
+      const usuarios = await this.usersRepository.find({
+        relations: ['roles'],
+      });
 
+      return usuarios.filter(user =>
+        user.roles.some(role => role.descripcion === 'Guía')
+      );
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException('Error al obtener los guías');
+    }
+  }
   async findEmail(correo: string): Promise<User> {
     try {
       const user = await this.usersRepository.findOne({ where: { correo: correo } });
@@ -82,27 +95,27 @@ export class UsersService {
         where: { id: userId },
         relations: ['roles'],
       });
-  
+
       if (!userWithRoles) {
         throw new NotFoundException(`No se encontró ningun usuario con id ${userId}`);
       }
-  
+
       return userWithRoles.roles;
     } catch (error) {
       this.logger.error(error);
       throw new NotFoundException(`No se encontró el usuario ${userId}`);
     }
   }
- 
+
   async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
     try {
       const user = await this.usersRepository.findOne({
         where: {
           id: id
         },
-        relations: ['roles'] 
-      } );
-  
+        relations: ['roles']
+      });
+
       if (!user) {
         throw new NotFoundException(`No se encontró ningun usuario con id  ${id}`);
       }
@@ -111,28 +124,28 @@ export class UsersService {
       const rolesEntities = await this.rolesRepository.findBy({ id: In(updateUserDto.roles!) });
       user.roles = rolesEntities;
       console.log(user)
-      
+
       return await this.usersRepository.save(user);
     } catch (error) {
       this.logger.error(`Error al actualizar usuario con id ${id}:`, error);
       throw new NotFoundException(`No se encontró una persona con id ${id}`);
     }
   }
-  
+
 
   async remove(id: number): Promise<{ borrados: number }> {
     try {
       const result = await this.usersRepository.softDelete(id);
-      
+
       if (result.affected === 0) {
         throw new NotFoundException(`No se encontró ningun usuario con id ${id}`);
       }
-  
+
       return { borrados: result.affected ?? 0 }; // Devuelve el número de registros eliminados
     } catch (error) {
       this.logger.error(`Error al eliminar al usuario con id ${id}:`, error);
       throw new InternalServerErrorException(`Error al eliminar al usuario con id ${id}`);
     }
   }
-  
+
 }

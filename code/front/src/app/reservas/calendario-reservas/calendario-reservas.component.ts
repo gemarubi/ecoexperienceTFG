@@ -153,7 +153,8 @@ parseHora = (fecha: string, hora: string): Date => {
       data: {
         fecha: this.fechaSeleccionada,
         hora: this.franjaSeleccionada,
-        rutaId: this.rutaId
+        rutaId: this.rutaId,
+        rutaTipo: this.tipoRuta
       }
     });
   }

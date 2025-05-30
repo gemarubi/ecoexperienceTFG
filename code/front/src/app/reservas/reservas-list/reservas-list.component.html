@@ -42,6 +42,13 @@
           <ng-template #noTuk>No asignado</ng-template>
         </td>
       </ng-container>
+       <ng-container matColumnDef="guia">
+        <th class="bg-header-table" mat-header-cell *matHeaderCellDef>Guía</th>
+        <td mat-cell *matCellDef="let reserva">
+          <span *ngIf="reserva.guia!=null; else noTuk">{{ reserva.guia.nombre }}  {{ reserva.guia.apellidos }}</span>
+          <ng-template #noTuk>No asignado</ng-template>
+        </td>
+      </ng-container>
 
       <ng-container matColumnDef="observaciones">
         <th class="bg-header-table" mat-header-cell *matHeaderCellDef>Observaciones</th>
@@ -51,7 +58,7 @@
       <ng-container matColumnDef="accion">
         <th class="bg-header-table text-center align-middle" mat-header-cell *matHeaderCellDef>Acción</th>
         <td class="text-center align-middle" mat-cell *matCellDef="let reserva">
-          <button mat-icon-button matTooltip="Asignar Guía" (click)="asignarGuia(reserva)">
+          <button mat-icon-button matTooltip="Asignar Guía" (click)="asignarGuia(reserva.id)">
             <mat-icon class="text-primary">supervisor_account</mat-icon>
           </button>
         </td>

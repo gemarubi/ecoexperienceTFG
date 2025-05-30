@@ -1,7 +1,14 @@
 <div class="card2 m-1">
   <div class="card-image">
-    <img [src]="ruta.imagen" alt="{{ ruta.titulo }}">
-    <span class="tipo display-6 fs-5"> {{ ruta.precio === '0.00' ? 'FreeTour' : ruta.precio + ' €' }}</span>
+    <img
+      [src]="ruta.tipo === 'Tuk Tuk' ? '/tuktukruta.webp' : ruta.imagen"
+      alt="{{ ruta.titulo }}"
+    />
+
+    <span class="tipo display-6 fs-5">
+      {{ ruta.precio === '0.00' ? 'FreeTour' : ruta.precio + ' €' }}
+    </span>
+
     <div class="info">
       <h3>{{ ruta.titulo }}</h3>
       <p>{{ ruta.subtitulo }}</p>

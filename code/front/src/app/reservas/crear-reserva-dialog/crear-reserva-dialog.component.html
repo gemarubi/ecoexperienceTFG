@@ -1,5 +1,6 @@
-<h2 mat-dialog-title>Crear reserva</h2>
-
+<div class="dialog-header">
+  <h2 class="text-light text-center fs-2" mat-dialog-title>Crear Reserva</h2>
+</div>
 <form [formGroup]="reservaForm" (ngSubmit)="enviarReserva()" class="p-3">
   <mat-form-field appearance="fill" class="w-100">
     <mat-label>Fecha</mat-label>
@@ -11,17 +12,24 @@
     <input matInput type="time" formControlName="hora">
   </mat-form-field>
 
-  <mat-form-field appearance="fill" class="w-100">
-    <mat-label>Asistentes</mat-label>
-    <input matInput type="number" formControlName="asistentes">
-  </mat-form-field>
+ <mat-form-field appearance="fill" class="w-100">
+  <mat-label>Asistentes</mat-label>
+  <input matInput type="number" formControlName="asistentes">
+  <mat-error *ngIf="reservaForm.get('asistentes')?.hasError('max')">
+    El número máximo de asistentes es
+    {{ data.rutaTipo }}.
+  </mat-error>
+</mat-form-field>
 
   <mat-form-field appearance="fill" class="w-100">
     <mat-label>Observaciones</mat-label>
     <textarea matInput formControlName="observaciones"></textarea>
   </mat-form-field>
-
-  <button mat-raised-button color="primary" type="submit" [disabled]="reservaForm.invalid">
+<div class="container-fluid d-flex justify-content-center ">
+ <button mat-fab extended class="m-2 bg-light text-success" color="primary" type="submit" [disabled]="reservaForm.invalid">
     Confirmar reserva
   </button>
+  <button mat-fab extended class=" m-2 bg-light text-danger" (click)="cancelar()">Cancelar</button>
+</div>
+
 </form>

@@ -1,6 +1,8 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { RutasService } from './rutas.service';
 import { SugerenciaRutaDto } from './dto/sugerencias-ruta.dto';
+import { Reserva } from 'src/reservas/entities/reserva.entity';
+import { CreateReservaDto } from 'src/reservas/dto/create-reserva.dto';
 
 @Controller('rutas')
 export class RutasController {

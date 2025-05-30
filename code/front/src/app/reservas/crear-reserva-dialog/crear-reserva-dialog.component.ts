@@ -19,25 +19,45 @@ export class CrearReservaDialogComponent {
     private reservasService:ReservasServiceService,
     private dialogRef: MatDialogRef<CrearReservaDialogComponent>,
      private snackBar: MatSnackBar,
-    @Inject(MAT_DIALOG_DATA) public data: { fecha: Date, rutaId: number, hora:string }
+    @Inject(MAT_DIALOG_DATA) public data: { fecha: Date, rutaId: number, hora:string , rutaTipo:string}
   ) {
     this.reservaForm = this.fb.group({
      fecha: [this.formatearFechaEsp(data.fecha), Validators.required],
       hora: [data.hora, Validators.required],
-      asistentes: [1, [Validators.required, Validators.min(1)]],
+      asistentes: [1, [Validators.required, Validators.min(1), Validators.max(25)]],
       observaciones: [''],
       clienteId: [1, Validators.required],
       guiaId: [null],
       rutasIds: [[data.rutaId], Validators.required]
     });
   }
+ ngOnInit(): void {
 
+    this.setMaximoAsistentes();
+  }
   formatearFechaEsp(fecha: Date): string {
   const day = fecha.getDate().toString().padStart(2, '0');
   const month = (fecha.getMonth() + 1).toString().padStart(2, '0');
   const year = fecha.getFullYear();
   return `${day}/${month}/${year}`;
 }
+
+ setMaximoAsistentes(): void {
+    const tipo = this.data.rutaTipo;
+
+    const maximo = tipo === 'Tuk Tuk' ? 4 : 25;
+    this.reservaForm.get('asistentes')?.setValidators([
+      Validators.required,
+      Validators.max(maximo),
+      Validators.min(1)
+    ]);
+
+    this.reservaForm.get('asistentes')?.updateValueAndValidity();
+  }
+
+   cancelar() {
+    this.dialogRef.close(null);
+  }
   enviarReserva(): void {
   if (this.reservaForm.invalid) return;
 
@@ -66,6 +86,6 @@ export class CrearReservaDialogComponent {
 
 convertirFecha(fecha: string): string {
   const partes = fecha.split('/');
-  return `${partes[2]}-${partes[1]}-${partes[0]}`; 
+  return `${partes[2]}-${partes[1]}-${partes[0]}`;
 }
 }

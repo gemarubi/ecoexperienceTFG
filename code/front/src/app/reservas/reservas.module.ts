@@ -5,7 +5,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { CrearReservaDialogComponent } from './crear-reserva-dialog/crear-reserva-dialog.component';
@@ -15,13 +15,16 @@ import { ReservasListComponent } from './reservas-list/reservas-list.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { AsignarGuiaDialogComponent } from './asignar-guia-dialog/asignar-guia-dialog.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 @NgModule({
   declarations: [
     CalendarioReservasComponent,
     CrearReservaDialogComponent,
-    ReservasListComponent
+    ReservasListComponent,
+    AsignarGuiaDialogComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +40,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatDialogModule,
      MatTableModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatRadioModule,
+    FormsModule
   ],
   exports:[
   CalendarioReservasComponent,

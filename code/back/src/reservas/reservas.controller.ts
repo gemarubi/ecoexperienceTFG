@@ -31,14 +31,25 @@ export class ReservasController {
     return this.reservasService.getFechasNoDisponibles(tipo);
   }
 
-  
+    @Roles('Admin')
+   @Get('guias/:idReserva')
+  findGuiasLibres(@Param('idReserva') idReserva:number) {
+    return this.reservasService.findGuiasLibres(idReserva);
+  }
   @Get()
-  //@UseGuards(JwtAuthGuard)
-  //@Roles('Admin')
+  @UseGuards(JwtAuthGuard)
+  @Roles('Admin')
   getAll(@Param('tipo') tipo: string) {
     
     return this.reservasService.getAllReservas();
   }
 
- 
+
+  @Post('asignarGuia')
+ @UseGuards(JwtAuthGuard)
+  @Roles('Admin')
+  asignarGuia(@Body() body, @Req() req: Request) {
+   
+ return this.reservasService.asignarGuia(body)
+}
 }

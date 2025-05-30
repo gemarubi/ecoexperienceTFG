@@ -1,5 +1,6 @@
-<div class="dialog-container ">
-  <div class="d-flex justify-content-center p-4 bg-create-user">
+<div class="dialog-container bg-dialog">
+
+ <div class="d-flex justify-content-center p-4 bg-create-user">
     <span class="h3 mt-4 ">Registro de usuario</span>
   </div>
 
@@ -54,7 +55,7 @@
     </div>
 
     <div class="container-fluid">
-      <mat-form-field appearance="outline" class="w-100">
+      <mat-form-field appearance="outline" class="w-100 ">
         <mat-label>Roles</mat-label>
         <mat-select [(ngModel)]="user.roles" name="roles" multiple required>
           <mat-option *ngFor="let rol of roles" [value]="rol.id">{{ rol.descripcion }}</mat-option>
@@ -64,11 +65,13 @@
   </div>
 
   <mat-dialog-actions class="button-group d-flex justify-content-center mt-4">
-    <button mat-raised-button  (click)="close()" color="warn" class="bg-danger action-button">
+    <button mat-fab extended class="bg-light text-danger"  (click)="close()" color="warn">
      Cancelar
     </button>
-    <button mat-raised-button (click)="save()" color="primary" class="action-button">
+    <button mat-fab extended class="bg-light text-success" (click)="save()" color="primary" >
       Guardar
     </button>
   </mat-dialog-actions>
+
+
 </div>

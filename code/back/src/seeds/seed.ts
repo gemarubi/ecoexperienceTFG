@@ -1,6 +1,7 @@
 import AppDataSource from '../../data-source';
 import { seedRoles } from './roles.seeder';
 import { seedRutas } from './rutas.seeder';
+import { seedTuktuk } from './tuktuk.seeder';
 import { seedUsers } from './users.seeder';
 
 async function runSeeds() {
@@ -10,6 +11,7 @@ async function runSeeds() {
   await seedRoles(AppDataSource);
   await seedUsers(AppDataSource);
   await seedRutas(AppDataSource);
+  await seedTuktuk(AppDataSource);
   await AppDataSource.destroy();
   
 }

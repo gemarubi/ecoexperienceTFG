@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { Intervalo, Reserva, ReservasList } from './interface/interface';
 import { FormGroup } from '@angular/forms';
+import { User } from '../users/interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,15 @@ export class ReservasServiceService {
    getReservas() {
 
     return this.http.get<ReservasList[]>(this.apiUrl);
+  }
+
+  getGuiasLibres(idReserva:number){
+
+    return this.http.get<User[]>(this.apiUrl+'/guias/'+idReserva);
+  }
+
+  asignarGuia(body:any){
+    console.log(body.idReserva)
+    return this.http.post<Reserva>(this.apiUrl+'/asignarGuia',body)
   }
 }

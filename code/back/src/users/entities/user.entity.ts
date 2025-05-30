@@ -1,6 +1,6 @@
 import { Reserva } from "src/reservas/entities/reserva.entity";
 import { Role } from "src/roles/entities/role.entity";
-import { Entity, Column, PrimaryColumn, BeforeInsert, BeforeUpdate, BeforeRemove, PrimaryGeneratedColumn, DeleteDateColumn, OneToMany, ManyToMany } from "typeorm";
+import { Entity, Column, PrimaryColumn, BeforeInsert, BeforeUpdate, BeforeRemove, PrimaryGeneratedColumn, DeleteDateColumn, OneToMany, ManyToMany, ManyToOne, JoinColumn } from "typeorm";
 
 @Entity('users')
 
@@ -40,4 +40,6 @@ export class User {
 
     @OneToMany(() => Reserva, reserva => reserva.guia)
     reservasGuia: Reserva[];
+
+  
 }
