@@ -1,4 +1,10 @@
-<app-header></app-header>
 
-<router-outlet></router-outlet>
+<header [class.fixed-header]="esHome">
+  <app-header></app-header>
+</header>
+
+<main [class.mt-espaciado]="esHome">
+  <router-outlet></router-outlet>
+</main>
+
 <app-footer></app-footer>

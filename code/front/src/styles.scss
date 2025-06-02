@@ -3,6 +3,7 @@
 html, body { height: 100%;
 }
 body { margin: 0;
+overflow-x: hidden!important;
  }
 .verde-secondary-text{
   color:#dcf29b
@@ -15,4 +16,14 @@ body { margin: 0;
   position: relative;
 }
 
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
 
+.mt-espaciado {
+  margin-top: 90px; // Ajusta según el alto real de tu header
+}

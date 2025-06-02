@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { ReservasServiceService } from '../reservas-service.service';
 import { Reserva, ReservasList } from '../interface/interface';
@@ -20,7 +21,10 @@ constructor(private reservasService: ReservasServiceService,  private dialog: Ma
 ngOnInit(): void {
   this.cargarReservas()
 }
+esRutaTukTuk(reserva: Reserva): boolean {
 
+  return reserva.tukTuks.length==1
+}
 asignarGuia(idReserva: number): void {
   this.reservasService.getGuiasLibres(idReserva).subscribe({
     next: (guias) => {
@@ -31,7 +35,7 @@ asignarGuia(idReserva: number): void {
 
       dialogRef.afterClosed().subscribe((guiaIdSeleccionado: number | null) => {
        console.log(guiaIdSeleccionado)
-        if (idReserva) {
+        if (idReserva && guiaIdSeleccionado) {
           const guia = guias.find(g => g.id === guiaIdSeleccionado);
           const body = { idReserva, idGuia: guiaIdSeleccionado };
 

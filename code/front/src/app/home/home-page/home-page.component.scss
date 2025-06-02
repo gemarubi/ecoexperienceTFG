@@ -23,3 +23,36 @@ h1{
    color: #FFFFFF !important;
    text-shadow: 0.08em 0.08em 0.08em rgba(0, 0, 0, 0.4);
 }
+
+
+.hero-video {
+  box-shadow: 20px  20px 0px  0px yellowgreen;
+  object-fit: cover;
+  max-width: 450px;
+  height:550px;
+}
+.tituloRutas{
+  font-size: 70px;
+  color:#0c5e0e!important;
+}
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 70, 0, 0.5); /* filtro oscuro verde-transparente */
+  z-index: 2;
+}
+
+.descripcion-container {
+  background-color: #f4f4f4;
+  border-top: 5px solid #4caf50;
+  border-bottom: 5px solid #4caf50;
+}
+
+.descripcion-texto {
+  max-width: 670px;
+  margin: 0 auto;
+  text-align: left;
+}

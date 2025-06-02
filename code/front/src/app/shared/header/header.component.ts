@@ -45,4 +45,5 @@ export class HeaderComponent {
     sessionStorage.removeItem('token');
     this.router.navigate(['/']);
   }
+  
 }

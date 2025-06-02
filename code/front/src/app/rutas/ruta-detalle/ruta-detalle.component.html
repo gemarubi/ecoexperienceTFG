@@ -22,7 +22,7 @@
       <span class="badge bg-warning text-dark fs-6">  {{ ruta.tipo === 'Tuk Tuk' ? '🛺' : '🚶' }} {{ ruta.tipo }}</span>
     </div>
 
-    <p class="fs-4">{{ ruta.descripcion }}</p>
+    <p class="fs-4" [innerHTML]="ruta.descripcion"></p>
   </div>
 
 </div>
