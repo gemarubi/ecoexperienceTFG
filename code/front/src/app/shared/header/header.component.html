@@ -3,26 +3,25 @@
     <div class="col-4 col-md-2 d-flex align-items-center logo-section mt-4 mb-4" routerLink="/">
       <img src="/logo-cordobaeco.png" alt="Logo Córdoba Eco Experience" class="logo" />
     </div>
-    <div class="ms-3 col-7 col-md-5 text-center">
+    <div class="ms-3 col-8 col-md-5 text-center">
       <nav class="ms-5 nav-menu fs-5 menu-header">
-        <a class="fs-5 menu-header text-success" mat-button routerLink="/" routerLinkActive="active">Inicio</a>
-        <a class="fs-5 menu-header text-secondary"  mat-button disabled  routerLink="/tuktuk">Tours en tuk tuk</a>
+        <a class="fs-6 menu-header text-success" mat-button routerLink="/" routerLinkActive="active">Inicio</a>
+        <a class="fs-6 menu-header text-secondary"  mat-button disabled  routerLink="/tuktuk">Tours en tuk tuk</a>
 
-        <button class="fs-5 text-secondary menu-header"  mat-button disabled [matMenuTriggerFor]="rutasMenu">Rutas a pie</button>
-        <mat-menu class="fs-5 menu-header" #rutasMenu="matMenu">
+        <button class="fs-6 text-secondary menu-header"  mat-button disabled [matMenuTriggerFor]="rutasMenu">Rutas a pie</button>
+        <mat-menu class="fs-6 menu-header" #rutasMenu="matMenu">
           <button mat-menu-item  routerLink="/rutas/monumental">Monumental</button>
           <button mat-menu-item  routerLink="/rutas/patios">Patios</button>
         </mat-menu>
 
-        <a class="fs-5 menu-header text-secondary"  mat-button disabled routerLink="/blog">Blog</a>
-        <a class="fs-5 menu-header text-secondary"  mat-button disabled routerLink="/contacto">Contacto</a>
+        <a class="fs-6 menu-header text-secondary"  mat-button disabled routerLink="/contacto">Contacto</a>
         <button mat-icon-button disabled>
           <mat-icon class=" fs-4 text-secondary ">shopping_cart</mat-icon>
         </button>
       </nav>
 
     </div>
-    <div class="col-3 col-md-2 d-flex justify-content-center">
+    <div class="col-2 col-md-2 d-flex justify-content-center">
 
   <button
     *ngIf="!isLoggedIn(); else userMenu"
