@@ -2,10 +2,11 @@
 .filter-panel {
   width: 300px;
   padding: 2rem;
-  background-color: #ffffff;
+
+  background:linear-gradient(to top, #a8faabc7, rgba(2, 57, 15, 0.724))
 }
 .bg-primary-eco{
-  background-color:yellowgreen !important;
+  background-color:rgb(185, 238, 79) !important;
  // color:#dcf29b
 }
 
@@ -23,7 +24,7 @@
 .slider-labels {
   display: flex;
   justify-content: space-between;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   color: #555;
   margin-top: -4px;
 }

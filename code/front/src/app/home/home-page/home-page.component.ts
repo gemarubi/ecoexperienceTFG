@@ -18,17 +18,11 @@ export class HomePageComponent {
 @ViewChild('introVideo') introVideo!: ElementRef<HTMLVideoElement>;
   ngOnInit(): void {
     this.rutasService.getAllRutas().subscribe({
-      next: (data) => this.rutas = data.slice(0, 6),
+      next: (data) => this.rutas = data,
       error: (err) => console.error('Error al cargar rutas:', err)
 
     });
- const navigation = this.router.getCurrentNavigation();
-  if (navigation?.trigger === 'imperative') {
-    // solo si es navegación inicial
-    setTimeout(() => {
-      this.introVideo?.nativeElement?.play();
-    }, 200);
-  }
+
   }
 
 
