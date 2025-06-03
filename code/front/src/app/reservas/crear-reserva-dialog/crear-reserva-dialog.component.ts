@@ -71,11 +71,14 @@ export class CrearReservaDialogComponent {
 
   this.reservasService.createReserva(reserva).subscribe({
     next: (res) => {
-      this.snackBar.open('Reserva creada correctamente', 'Cerrar', { duration: 3000 });
+
       this.dialogRef.close({
         reserva: res,
         message: "Reserva creada correctamente"
       });
+
+      this.snackBar.open('Reserva creada correctamente', 'Cerrar', { duration: 3000 });
+      
     },
     error: (err) => {
       console.error('Error al crear reserva:', err);

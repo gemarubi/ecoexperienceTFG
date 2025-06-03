@@ -3,7 +3,7 @@
 html, body { height: 100%;
 }
 body { margin: 0;
-overflow-x: hidden!important;
+
  }
 .verde-secondary-text{
   color:#dcf29b
@@ -26,4 +26,6 @@ overflow-x: hidden!important;
 
 .mt-espaciado {
   margin-top: 90px; // Ajusta según el alto real de tu header
+overflow-x: hidden;
 }
+

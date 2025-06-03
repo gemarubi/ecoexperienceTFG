@@ -150,6 +150,7 @@ parseHora = (fecha: string, hora: string): Date => {
 
     this.dialog.open(CrearReservaDialogComponent, {
       width: '400px',
+
       data: {
         fecha: this.fechaSeleccionada,
         hora: this.franjaSeleccionada,
@@ -157,6 +158,8 @@ parseHora = (fecha: string, hora: string): Date => {
         rutaTipo: this.tipoRuta
       }
     });
+
+    
   }
 
   seleccionarFranja(franja: { hora: string; disponible: boolean }): void {
