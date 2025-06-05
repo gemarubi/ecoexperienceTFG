@@ -21,7 +21,7 @@ Es necesario instalar las dependencias :
 ```
 2. Instala las dependencias de NestJS:
 ```bash
-	npm install
+	npm install --legacy-peer-deps
 ```
 #### 🎨 Front-end:
 1. Navega a la carpeta `front`: 
@@ -48,6 +48,16 @@ En este punto puedes recurrir a dos opciones según tu preferencia:
 	yarn ts-node -r tsconfig-paths/register src/seeds/seed.ts
 ```
 2. Importa la base de datos en tu `phpMyAdmin` con el archivo `.sql` que encontrarás en la carpeta del proyecto `/code`.
+
+### 4️⃣ Conecta el proyecto con tu bbdd
+En la carpeta back crea un archivo .env con la siguiente estructura y tus datos de la bbdd
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=nombreBBDD
+DB_USER=tuUsuario
+DB_PASS=tuContraseña
+GOOGLE_API_KEY=AIzaSyB3SuMTfclsGIATMJHUdoyPgcu1BwK5GBM
+GOOGLE_PLACE_ID=ChIJtdbC0aMgbQ0REWfdU78a2JY
 
 ### 4️⃣ Levanta el proyecto
 Es necesario levantar el back y el front 
