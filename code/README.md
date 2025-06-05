@@ -51,6 +51,7 @@ En este punto puedes recurrir a dos opciones según tu preferencia:
 
 ### 4️⃣ Conecta el proyecto con tu bbdd
 En la carpeta back crea un archivo .env con la siguiente estructura y tus datos de la bbdd
+```bash
 DB_HOST=localhost
 DB_PORT=3306
 DB_DATABASE=nombreBBDD
@@ -58,7 +59,7 @@ DB_USER=tuUsuario
 DB_PASS=tuContraseña
 GOOGLE_API_KEY=AIzaSyB3SuMTfclsGIATMJHUdoyPgcu1BwK5GBM
 GOOGLE_PLACE_ID=ChIJtdbC0aMgbQ0REWfdU78a2JY
-
+```
 ### 4️⃣ Levanta el proyecto
 Es necesario levantar el back y el front 
 
