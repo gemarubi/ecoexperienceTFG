@@ -4,7 +4,7 @@ import { seedRutas } from './rutas.seeder';
 import { seedTuktuk } from './tuktuk.seeder';
 import { seedUsers } from './users.seeder';
 
-async function runSeeds() {
+export async function runSeeds() {
   await AppDataSource.initialize();
 
 
