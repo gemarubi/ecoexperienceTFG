@@ -16,18 +16,18 @@ console.log('✅ data-source.ts cargado con: ', {
 });
 
 const AppDataSource = new DataSource({
-  type: 'mysql',
-  host: process.env.DB_HOST,
-  port: parseInt(process.env.DB_PORT || '3306'),
-  username: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_DATABASE,
+  type: 'postgres',
+   host: process.env.DB_HOST || 'localhost',
+  port: parseInt(process.env.DB_PORT || '5432'),
+  username: process.env.DB_USER ,
+  password: process.env.DB_PASS ,
+  database: process.env.DB_DATABASE ,
   entities: [User, Role, Reserva, Ruta, TukTuk],
   migrations: [
     'dist/migrations/*.js', // en producción
     'src/migrations/*.ts',  // en desarrollo
   ],
-  synchronize: false, // ⚠️ no lo pongas en true en producción
+  synchronize: true,
   logging: true,
 });
 

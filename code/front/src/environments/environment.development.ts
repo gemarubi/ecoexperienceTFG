@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://ecoexperiencetfg-production.up.railway.app/api',
+  apiUrl: 'http://localhost:3000/api',
   //uploadUrl: 'http://localhost:9090/uploads/profile-pictures/'
 };

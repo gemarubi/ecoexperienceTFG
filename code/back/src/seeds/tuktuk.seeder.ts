@@ -5,9 +5,7 @@ import { DataSource } from 'typeorm';
 export const seedTuktuk = async (dataSource: DataSource) => {
   const tuktukRepo = dataSource.getRepository(TukTuk);
 
-  const tuktukData = ['0515MZL'].map((matricula) =>
-    tuktukRepo.create({ matricula }),
-  );
+  const tuktukData = [ tuktukRepo.create({ matricula: '0515MZL', capacidad: 4 })]
 
   await tuktukRepo.save(tuktukData);
  
