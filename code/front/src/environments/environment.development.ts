@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:3000/api',
+  apiUrl: 'https://ecoexperiencetfg.onrender.com/api',
   //uploadUrl: 'http://localhost:9090/uploads/profile-pictures/'
 };
